@@ -1,0 +1,18 @@
+# Swarm Mind — complete local stack:  docker compose up --build
+# Dashboard: http://localhost:8080   (change the host port with SWARM_WEB_PORT)
+services:
+  api:
+    build: ./backend
+    environment:
+      SWARM_EXPERIMENTS_DIR: /experiments
+    volumes:
+      # experiment configs are read from here and results are written back here
+      - ./experiments:/experiments
+
+  web:
+    build: ./frontend
+    ports:
+      - "${SWARM_WEB_PORT:-8080}:80"
+    depends_on:
+      api:
+        condition: service_healthy

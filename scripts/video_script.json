@@ -1,0 +1,148 @@
+[
+  {
+    "id": "introduction",
+    "visual": {
+      "type": "card",
+      "title": "Swarm Mind",
+      "subtitle": "Intelligence Without a Leader",
+      "lines": [
+        "A research-inspired simulation · synthetic data · no language model"
+      ],
+      "backdrop": "showcase/screenshots/hero-three-worlds.png"
+    },
+    "lines": [
+      {
+        "text": "Swarm Mind. Intelligence without a leader."
+      },
+      {
+        "text": "Can simple agents solve a problem together, when nobody is in charge?"
+      }
+    ]
+  },
+  {
+    "id": "the-problem",
+    "visual": {
+      "type": "clip",
+      "file": "independent.webm"
+    },
+    "lines": [
+      {
+        "text": "In this simulated world, {agents} agents leave the nest to search for food."
+      },
+      {
+        "text": "Each one explores on its own, picks up food, and carries it home."
+      },
+      {
+        "text": "No agent shares what it finds. This is our baseline."
+      }
+    ]
+  },
+  {
+    "id": "local-communication",
+    "visual": {
+      "type": "clip",
+      "file": "collective.webm"
+    },
+    "lines": [
+      {
+        "text": "Now we change one thing. Agents carrying food leave a pheromone mark behind them."
+      },
+      {
+        "text": "Other agents can smell these marks nearby, and tend to follow them."
+      },
+      {
+        "text": "Nobody draws these trails. They emerge from many small local choices, and fade when they are no longer used."
+      }
+    ]
+  },
+  {
+    "id": "three-world-comparison",
+    "visual": {
+      "type": "clip",
+      "file": "three-worlds.webm"
+    },
+    "lines": [
+      {
+        "text": "Three worlds run side by side: the same map, the same agents, the same random seed."
+      },
+      {
+        "text": "The only difference is communication. None, pheromone, and pheromone that will be cut off halfway."
+      }
+    ]
+  },
+  {
+    "id": "communication-breakdown",
+    "visual": {
+      "type": "clip",
+      "file": "breakdown.webm"
+    },
+    "lines": [
+      {
+        "text": "In the third world, at step {cut_step:,}, we switch communication off."
+      },
+      {
+        "text": "The old trails stay visible for a while, but no agent can smell them, and they fade away."
+      },
+      {
+        "text": "The swarm does not stop. It falls back to searching alone."
+      }
+    ]
+  },
+  {
+    "id": "measured-results",
+    "visual": {
+      "type": "images",
+      "files": [
+        "experiments/results/food_delivered_curves.png",
+        "experiments/results/interruption_windows.png",
+        "experiments/results/interruption_windows.png",
+        "experiments/results/sensitivity.png",
+        "experiments/results/sensitivity.png"
+      ]
+    },
+    "lines": [
+      {
+        "text": "Across {n_seeds} random seeds, the communicating swarm delivered {collective:,} units of food on average, against {independent:,} for independent agents."
+      },
+      {
+        "text": "After the cut, the third world delivered {post_interrupted:,} units, close to the independent baseline of {post_independent:,}."
+      },
+      {
+        "text": "The uninterrupted swarm delivered {post_collective:,} in the same period."
+      },
+      {
+        "text": "The advantage is not universal. With fast evaporation, it shrinks to {fast_evap_relative} percent."
+      },
+      {
+        "text": "And when trails never fade while food keeps moving, the communicating swarm did {stale_relative_abs} percent worse."
+      }
+    ]
+  },
+  {
+    "id": "research-and-transparency",
+    "visual": {
+      "type": "card",
+      "title": "Swarm Mind",
+      "subtitle": "Simple rules · local signals · collective behaviour",
+      "lines": [
+        "Inspired by Deneubourg et al. (1990), Dorigo et al. (1996) and Reynolds (1987)",
+        "All data is synthetic  ·  No LLM in the system  ·  Results describe this simulation only",
+        "README · docs · experiments · tests — in the repository"
+      ],
+      "backdrop": "showcase/screenshots/world-collective-trails.png"
+    },
+    "lines": [
+      {
+        "text": "This is a research-inspired proof of concept, built on ideas from Deneubourg, Dorigo, and Reynolds.",
+        "say": "This is a research-inspired proof of concept, built on ideas from Den-uh-boor, Doreego, and Reynolds."
+      },
+      {
+        "text": "All data is synthetic. No language model is involved. The results describe this simulation only, not real ants.",
+        "say": "All data is synthetic. No language model is involved. The results describe this simulation only, not real ants."
+      },
+      {
+        "text": "Swarm Mind. Simple rules, local signals, collective behaviour."
+      }
+    ]
+  }
+]

@@ -1,0 +1,300 @@
+{
+  "file": "showcase/video/swarm-mind-demo.mp4",
+  "size_mb": 11.97,
+  "duration_seconds": 118.9,
+  "video": {
+    "codec_name": "h264",
+    "width": 1920,
+    "height": 1080,
+    "r_frame_rate": "30/1",
+    "pix_fmt": "yuv420p",
+    "nb_frames": "3567"
+  },
+  "audio": {
+    "codec_name": "aac",
+    "sample_rate": "44100",
+    "channels": 2
+  },
+  "full_decode_errors": null,
+  "narration": {
+    "voice": "Microsoft Zira Desktop",
+    "rate": 1,
+    "utterances": 21,
+    "speech_rms_db": -19.8,
+    "music_rms_db_under_speech": -40.8,
+    "speech_minus_music_db": 21.0
+  },
+  "subtitles": {
+    "cues": 21,
+    "each_cue_starts_with_its_own_utterance": true,
+    "max_chars": 125,
+    "max_chars_per_second": 18.6,
+    "shortest_cue_seconds": 3.13,
+    "overlapping_cues": 0,
+    "subtitle_band_px": 150
+  },
+  "frame_checks": [
+    {
+      "scene": "introduction",
+      "time": 1.3,
+      "frame": "introduction_first-cue.png",
+      "subtitle_pixels_in_band": 3107
+    },
+    {
+      "scene": "introduction",
+      "time": 4.53,
+      "frame": "introduction_last-cue.png",
+      "subtitle_pixels_in_band": 5083
+    },
+    {
+      "scene": "the-problem",
+      "time": 9.63,
+      "frame": "the-problem_first-cue.png",
+      "subtitle_pixels_in_band": 4605
+    },
+    {
+      "scene": "the-problem",
+      "time": 17.93,
+      "frame": "the-problem_last-cue.png",
+      "subtitle_pixels_in_band": 3415
+    },
+    {
+      "scene": "local-communication",
+      "time": 22.93,
+      "frame": "local-communication_first-cue.png",
+      "subtitle_pixels_in_band": 6156
+    },
+    {
+      "scene": "local-communication",
+      "time": 31.59,
+      "frame": "local-communication_last-cue.png",
+      "subtitle_pixels_in_band": 7717
+    },
+    {
+      "scene": "three-world-comparison",
+      "time": 39.4,
+      "frame": "three-world-comparison_first-cue.png",
+      "subtitle_pixels_in_band": 5883
+    },
+    {
+      "scene": "three-world-comparison",
+      "time": 44.98,
+      "frame": "three-world-comparison_last-cue.png",
+      "subtitle_pixels_in_band": 7008
+    },
+    {
+      "scene": "communication-breakdown",
+      "time": 51.83,
+      "frame": "communication-breakdown_first-cue.png",
+      "subtitle_pixels_in_band": 4144
+    },
+    {
+      "scene": "communication-breakdown",
+      "time": 61.9,
+      "frame": "communication-breakdown_last-cue.png",
+      "subtitle_pixels_in_band": 3922
+    },
+    {
+      "scene": "measured-results",
+      "time": 67.1,
+      "frame": "measured-results_first-cue.png",
+      "subtitle_pixels_in_band": 9084
+    },
+    {
+      "scene": "measured-results",
+      "time": 94.02,
+      "frame": "measured-results_last-cue.png",
+      "subtitle_pixels_in_band": 7050
+    },
+    {
+      "scene": "research-and-transparency",
+      "time": 100.53,
+      "frame": "research-and-transparency_first-cue.png",
+      "subtitle_pixels_in_band": 6929
+    },
+    {
+      "scene": "research-and-transparency",
+      "time": 113.92,
+      "frame": "research-and-transparency_last-cue.png",
+      "subtitle_pixels_in_band": 4240
+    }
+  ],
+  "numbers_from_summary_json": {
+    "n_seeds": 20,
+    "steps": 3000,
+    "cut_step": 1500,
+    "agents": 60,
+    "independent": 561,
+    "collective": 1279,
+    "relative": 128,
+    "post_collective": 654,
+    "post_interrupted": 302,
+    "post_independent": 275,
+    "fast_evap_relative": 13,
+    "stale_relative": -4,
+    "stale_relative_abs": 4
+  },
+  "scenes": [
+    {
+      "id": "introduction",
+      "start": 0.0,
+      "end": 8.33,
+      "source": "text card over blurred showcase/screenshots/hero-three-worlds.png",
+      "cues": [
+        {
+          "start": 0.7,
+          "end": 3.83,
+          "text": "Swarm Mind. Intelligence without a leader."
+        },
+        {
+          "start": 3.93,
+          "end": 7.79,
+          "text": "Can simple agents solve a problem together, when nobody is in charge?"
+        }
+      ]
+    },
+    {
+      "id": "the-problem",
+      "start": 8.33,
+      "end": 21.63,
+      "source": "independent.webm (simulation steps 4+, recorded live)",
+      "cues": [
+        {
+          "start": 9.03,
+          "end": 13.04,
+          "text": "In this simulated world, 60 agents leave the nest to search for food."
+        },
+        {
+          "start": 13.14,
+          "end": 17.23,
+          "text": "Each one explores on its own, picks up food, and carries it home."
+        },
+        {
+          "start": 17.33,
+          "end": 21.08,
+          "text": "No agent shares what it finds. This is our baseline."
+        }
+      ]
+    },
+    {
+      "id": "local-communication",
+      "start": 21.63,
+      "end": 38.1,
+      "source": "collective.webm (simulation steps 4+, recorded live)",
+      "cues": [
+        {
+          "start": 22.33,
+          "end": 27.18,
+          "text": "Now we change one thing. Agents carrying food leave a pheromone mark behind them."
+        },
+        {
+          "start": 27.28,
+          "end": 30.89,
+          "text": "Other agents can smell these marks nearby, and tend to follow them."
+        },
+        {
+          "start": 30.99,
+          "end": 37.54,
+          "text": "Nobody draws these trails. They emerge from many small local choices, and fade when they are no longer used."
+        }
+      ]
+    },
+    {
+      "id": "three-world-comparison",
+      "start": 38.1,
+      "end": 50.53,
+      "source": "three-worlds.webm (simulation steps 522+, recorded live)",
+      "cues": [
+        {
+          "start": 38.8,
+          "end": 44.28,
+          "text": "Three worlds run side by side: the same map, the same agents, the same random seed."
+        },
+        {
+          "start": 44.38,
+          "end": 49.98,
+          "text": "The only difference is communication. None, pheromone, and pheromone that will be cut off halfway."
+        }
+      ]
+    },
+    {
+      "id": "communication-breakdown",
+      "start": 50.53,
+      "end": 65.8,
+      "source": "breakdown.webm (simulation steps 1382+, recorded live)",
+      "cues": [
+        {
+          "start": 51.23,
+          "end": 56.06,
+          "text": "In the third world, at step 1,500, we switch communication off."
+        },
+        {
+          "start": 56.16,
+          "end": 61.2,
+          "text": "The old trails stay visible for a while, but no agent can smell them, and they fade away."
+        },
+        {
+          "start": 61.3,
+          "end": 65.26,
+          "text": "The swarm does not stop. It falls back to searching alone."
+        }
+      ]
+    },
+    {
+      "id": "measured-results",
+      "start": 65.8,
+      "end": 99.23,
+      "source": "experiments/results/food_delivered_curves.png, experiments/results/interruption_windows.png, experiments/results/interruption_windows.png, experiments/results/sensitivity.png, experiments/results/sensitivity.png",
+      "cues": [
+        {
+          "start": 66.5,
+          "end": 76.46,
+          "text": "Across 20 random seeds, the communicating swarm delivered 1,279 units of food on average, against 561 for independent agents."
+        },
+        {
+          "start": 76.56,
+          "end": 83.6,
+          "text": "After the cut, the third world delivered 302 units, close to the independent baseline of 275."
+        },
+        {
+          "start": 83.7,
+          "end": 87.71,
+          "text": "The uninterrupted swarm delivered 654 in the same period."
+        },
+        {
+          "start": 87.81,
+          "end": 93.32,
+          "text": "The advantage is not universal. With fast evaporation, it shrinks to 13 percent."
+        },
+        {
+          "start": 93.42,
+          "end": 98.68,
+          "text": "And when trails never fade while food keeps moving, the communicating swarm did 4 percent worse."
+        }
+      ]
+    },
+    {
+      "id": "research-and-transparency",
+      "start": 99.23,
+      "end": 118.97,
+      "source": "text card over blurred showcase/screenshots/world-collective-trails.png",
+      "cues": [
+        {
+          "start": 99.93,
+          "end": 105.47,
+          "text": "This is a research-inspired proof of concept, built on ideas from Deneubourg, Dorigo, and Reynolds."
+        },
+        {
+          "start": 105.57,
+          "end": 113.22,
+          "text": "All data is synthetic. No language model is involved. The results describe this simulation only, not real ants."
+        },
+        {
+          "start": 113.32,
+          "end": 118.43,
+          "text": "Swarm Mind. Simple rules, local signals, collective behaviour."
+        }
+      ]
+    }
+  ]
+}

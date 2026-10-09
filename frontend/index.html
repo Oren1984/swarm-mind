@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swarm Mind — Intelligence Without a Leader</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='5' fill='%23fff'/%3E%3Ccircle cx='6' cy='8' r='2.5' fill='%23e056a0'/%3E%3Ccircle cx='26' cy='9' r='2.5' fill='%2335c46a'/%3E%3Ccircle cx='9' cy='26' r='2.5' fill='%2386b6ef'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <h1>Swarm Mind <span>Intelligence Without a Leader</span></h1>
+        <p class="tagline">
+          Three matched worlds, one simulation engine. Can simple agents that only leave and smell
+          chemical marks out-forage agents that work alone?
+        </p>
+      </div>
+      <div class="status">
+        <span id="mode-badge" class="badge" data-testid="mode-badge">Controlled scenario</span>
+        <span class="badge quiet" data-testid="run-state" id="run-state">Paused</span>
+        <span class="badge quiet">step <b id="step-count" data-testid="step-count">0</b></span>
+        <span class="badge quiet">seed <b id="seed-label" data-testid="seed-label">1</b></span>
+      </div>
+    </header>
+
+    <section class="controls" aria-label="Simulation controls">
+      <div class="group">
+        <button id="btn-start" class="primary" data-testid="btn-start">Start</button>
+        <button id="btn-pause" data-testid="btn-pause" disabled>Pause</button>
+        <button id="btn-reset" data-testid="btn-reset" title="Restart the same scenario from step 0">Reset</button>
+        <button id="btn-new" data-testid="btn-new" title="Generate a new map from a new seed">New scenario</button>
+      </div>
+      <div class="group">
+        <label>Speed
+          <select id="speed" data-testid="speed">
+            <option value="1">1×</option>
+            <option value="2" selected>2×</option>
+            <option value="4">4×</option>
+            <option value="8">8×</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="show-pheromone" data-testid="show-pheromone" checked /> Show pheromone</label>
+      </div>
+      <div class="group">
+        <button id="btn-interrupt" data-testid="btn-interrupt" title="Cut pheromone communication in the Breakdown world right now">Cut communication now</button>
+        <button id="btn-obstacle" data-testid="btn-obstacle" title="Insert the same wall into all three worlds, across the route to the nearest food source">Inject obstacle</button>
+      </div>
+      <div class="group">
+        <button class="seg active" data-view="all" data-testid="view-all">Compare all</button>
+        <button class="seg" data-view="independent" data-testid="view-independent">Independent</button>
+        <button class="seg" data-view="collective" data-testid="view-collective">Collective</button>
+        <button class="seg" data-view="interrupted" data-testid="view-interrupted">Breakdown</button>
+      </div>
+      <details class="params" data-testid="params">
+        <summary>Scenario parameters</summary>
+        <div class="param-grid">
+          <label>Agents per world <output id="out-agents">60</output>
+            <input type="range" id="agent-count" data-testid="agent-count" min="10" max="200" step="10" value="60" />
+          </label>
+          <label>Pheromone strength <output id="out-deposit">1.0</output>
+            <input type="range" id="deposit" data-testid="deposit" min="0" max="5" step="0.25" value="1" />
+          </label>
+          <label>Cut communication at step
+            <input type="number" id="interruption-step" data-testid="interruption-step" min="0" max="100000" step="100" value="1500" />
+          </label>
+          <button id="btn-apply" class="primary" data-testid="btn-apply">Apply &amp; restart</button>
+        </div>
+        <p class="hint">
+          Changing a parameter restarts all three worlds from step 0. A comparison is only fair if every
+          world ran its whole history under the same settings, so parameters cannot change mid-run.
+        </p>
+      </details>
+    </section>
+
+    <p id="mode-note" class="mode-note" data-testid="mode-note"></p>
+
+    <main>
+      <section id="worlds" class="worlds" data-view="all" aria-label="The three worlds">
+        <article class="world" data-world="independent" data-testid="world-independent">
+          <header>
+            <h2><i class="dot independent"></i>Independent</h2>
+            <span class="chip" data-chip>No communication</span>
+          </header>
+          <p class="role">Baseline control — every agent forages alone.</p>
+          <canvas data-testid="canvas-independent"></canvas>
+          <dl class="stats"></dl>
+        </article>
+        <article class="world" data-world="collective" data-testid="world-collective">
+          <header>
+            <h2><i class="dot collective"></i>Collective</h2>
+            <span class="chip" data-chip>Pheromone on</span>
+          </header>
+          <p class="role">Same agents, plus pheromone marks they leave and smell.</p>
+          <canvas data-testid="canvas-collective"></canvas>
+          <dl class="stats"></dl>
+        </article>
+        <article class="world" data-world="interrupted" data-testid="world-interrupted">
+          <header>
+            <h2><i class="dot interrupted"></i>Communication Breakdown</h2>
+            <span class="chip" data-chip data-testid="chip-interrupted">Pheromone on</span>
+          </header>
+          <p class="role">Same as Collective until communication is cut.</p>
+          <canvas data-testid="canvas-interrupted"></canvas>
+          <dl class="stats"></dl>
+        </article>
+      </section>
+
+      <ul class="legend" aria-label="Legend">
+        <li><i class="tri" style="--c:#86b6ef"></i>Exploring</li>
+        <li><i class="tri" style="--c:#f2c230"></i>Following a trail</li>
+        <li><i class="tri" style="--c:#2ee6c8"></i>Returning with food</li>
+        <li><i class="sw" style="background:#35c46a;border-radius:50%"></i>Food source</li>
+        <li><i class="sw ring"></i>Nest</li>
+        <li><i class="sw" style="background:#e056a0"></i>Pheromone trail</li>
+        <li><i class="sw" style="background:#96969e"></i>Fading trail (no longer sensed)</li>
+        <li><i class="sw" style="background:#5b5a55"></i>Obstacle</li>
+        <li class="tip">Shift-click a world to place a wall there.</li>
+      </ul>
+
+      <section class="results" aria-label="Results">
+        <div class="card chart-card">
+          <h3>Food delivered to the nest <small>live, measured by the simulation engine</small></h3>
+          <ul class="chart-legend">
+            <li><i class="dot independent"></i>Independent</li>
+            <li><i class="dot collective"></i>Collective</li>
+            <li><i class="dot interrupted"></i>Communication Breakdown</li>
+          </ul>
+          <div class="chart-wrap">
+            <canvas id="chart" data-testid="chart"></canvas>
+            <div id="chart-tooltip" class="tooltip" hidden></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>This run, side by side</h3>
+          <table id="metrics-table" data-testid="metrics-table"></table>
+          <h4>Intervention log</h4>
+          <ul id="event-log" class="event-log" data-testid="event-log"><li class="muted">No interventions yet.</li></ul>
+        </div>
+
+        <div class="card wide">
+          <h3>Controlled experiments <small>many seeds, not one lucky run</small></h3>
+          <div class="exp-grid">
+            <div>
+              <h4>Stored experiment</h4>
+              <div id="stored-results" data-testid="stored-results" class="muted">Loading…</div>
+            </div>
+            <div>
+              <h4>Run a quick experiment now</h4>
+              <p class="hint">
+                Runs fresh simulations on the server: 4 seeds × 3 worlds × 1,000 steps, communication cut
+                at step 500 in the Breakdown world. A small sample — use it as a sanity check, not as the result.
+              </p>
+              <button id="btn-quick" class="primary" data-testid="btn-quick">Run quick experiment</button>
+              <div id="quick-results" data-testid="quick-results"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <b>Research &amp; transparency.</b> Swarm Mind is a research-inspired proof of concept. Every map,
+        agent and measurement is synthetic, produced by a local rule-based simulation. No large language
+        model is involved. Results describe this simulated system only — they are not a proof of
+        intelligence or a validation of real ant behaviour.
+        <span id="version" class="muted"></span>
+      </p>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
